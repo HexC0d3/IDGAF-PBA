@@ -4,20 +4,38 @@ import argparse
 import sys
 import os
 from datetime import datetime
+import textwrap
 
 sys.path.append(os.getcwd()+'/src')
 from pdc import PsDump
 
-# version = '0.0.1'
-# parser = argparse.ArgumentParser(prog='IDGAF_PastebinAPI', description="IDGAF-PastebinAPI\nVersion:"+version)
+version = '1.0.0'
+parser = argparse.ArgumentParser(
+    prog='IDGAF_PastebinAPI', 
+    description=textwrap.dedent('''\
+    IDGAF-PastebinAPI | 
+    Version:'''+version+ ''' |
+    Code by: HexC0d3
+    '''))
 # parser.add_argument('--version', action='version', version="%(prog)s \nVersion: "+version)
-# args = parser.parse_args()
+# parser.add_argument('-s',type=str, help="Keyword to Search" )
+# parser.add_argument('-iL',type=str, help="Input Text File containing list of Keywords" )
+inputGroup = parser.add_mutually_exclusive_group()
+inputGroup.add_argument('-s' , '--search', type=str, help="Keyword to Search")
+inputGroup.add_argument('-iL', '--input', type=str, help="Input Text File containing list of Keywords")
+args = parser.parse_args()
 
 # TODO: 
 # 1. Add File check for all Required SRC files 
 # 2. Implement argParse
 # O. Output to a file
 # 4. Input Sanitization
+
+# Set Keyword a single query or file
+if (args.search):
+    keyword = args.search
+elif (args.input):
+    keyword = args.input
 
 def get_psDump(keyword):
     
@@ -45,4 +63,4 @@ def get_psDump(keyword):
 
 
 if __name__ == '__main__':
-    get_psDump(sys.argv[1])
+    get_psDump(keyword)
