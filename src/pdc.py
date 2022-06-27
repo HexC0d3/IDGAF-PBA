@@ -55,6 +55,7 @@ class PsDump:
 
                 # Adding a list to return data.
                 pasteURLs = []
+                
                 for paste in dumpList:
                     #print('https://pastebin.com/'+ paste.split('/')[2])
                     pasteURLs.append('https://pastebin.com/'+ paste.split('/')[2])
