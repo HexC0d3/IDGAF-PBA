@@ -6,7 +6,7 @@ import sys
 import re
 
 
-class pdc:
+class PsDump:
     def check_psDump(searchKeyword):
         psUrl = 'https://psbdmp.ws/'
 
@@ -53,9 +53,16 @@ class pdc:
 
                 # -- Iterate over dumpList to get URL part of the pastebin --
 
+                # Adding a list to return data.
+                pasteURLs = []
                 for paste in dumpList:
-                    print('https://pastebin.com/'+ paste.split('/')[2])
+                    #print('https://pastebin.com/'+ paste.split('/')[2])
+                    pasteURLs.append('https://pastebin.com/'+ paste.split('/')[2])
+
+                return pasteURLs    
+                
 
 
 if __name__ == '__main__':
-    pdc.check_psDump(sys.argv[1])
+    for links in PsDump.check_psDump(sys.argv[1]):
+        print(links)
